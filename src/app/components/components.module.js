@@ -1,1 +1,1 @@
-angular.module('components',[]);
+angular.module('components',['components.test']);

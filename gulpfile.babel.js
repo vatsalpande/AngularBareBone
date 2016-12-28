@@ -17,17 +17,20 @@ import sourcemaps from 'gulp-sourcemaps';
 const exec = child.exec;
 const argv = yargs.argv;
 const root = 'src/';
+const node_modules = 'node_modules'
 const paths = {
   dist: './dist/',
   scripts: [`${root}/app/**/*.js`, `!${root}/app/**/*.spec.js`],
   tests: `${root}/app/**/*.spec.js`,
-  styles: `${root}/sass/*.scss`,
+  styles: [`${root}/sass/*.scss`,`${node_modules}/angular-material/angular-material.scss`],
   templates: `${root}/app/**/*.html`,
   modules: [
     'angular/angular.js',
+    'angular-aria/angular-aria.js',
+    'angular-animate/angular-animate.js',
+    'angular-messages/angular-messages.js',
+    'angular-material/angular-material.js',
     'angular-ui-router/release/angular-ui-router.js',
-    'firebase/firebase.js',
-    'angularfire/dist/angularfire.js',
     'angular-loading-bar/build/loading-bar.min.js'
   ],
   static: [
@@ -102,14 +105,14 @@ gulp.task('watch', ['serve', 'scripts'], () => {
   gulp.watch([paths.scripts, paths.templates], ['scripts']);
   gulp.watch(paths.styles, ['styles']);
 });
-
-gulp.task('firebase', ['styles', 'scripts'], cb => {
-  return exec('firebase deploy', function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-  });
-});
+//
+// gulp.task('firebase', ['styles', 'scripts'], cb => {
+//   return exec('firebase deploy', function (err, stdout, stderr) {
+//     console.log(stdout);
+//     console.log(stderr);
+//     cb(err);
+//   });
+// });
 
 gulp.task('default', [
   'copy',
@@ -120,6 +123,6 @@ gulp.task('default', [
 
 gulp.task('production', [
   'copy',
-  'scripts',
-  'firebase'
+  'scripts'
+  //'firebase'
 ]);
