@@ -2,7 +2,7 @@
   "name": "angularAppBareBone",
   "version": "1.0.0",
   "author": "@vatsalpande",
-  "description": "Angular App  based on component js",
+  "description": "Angular App structure based on component architecture and material design",
   "scripts": {
     "start": "gulp",
     "test": "karma start",
